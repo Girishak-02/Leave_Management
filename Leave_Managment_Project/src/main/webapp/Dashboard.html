@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Management System</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Leave Management</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="dashboard-link">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="my-leaves-link">My Leaves</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="my-team-leaves-link">My Team's Leaves</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="profileButton">Profile</a>
+            </li>
+        </ul>
+        <button class="btn btn-outline-primary my-2 my-sm-0 mt-3" data-toggle="modal" data-target="#applyLeaveModal">Apply for Leave</button>
+        <button class="btn btn-outline-success my-2 my-sm-0" id="logoutButton">Logout</button>
+    </div>
+</nav>
+<div class="container">
+    <div id="dashboard-section" class="dashboard-summary">
+        <h5>Dashboard</h5>
+        <div class="row">
+            <div class="col-md-4 shadow">
+                <div class="summary-card ">
+                    <h6 class="tag mt-4 text-center">Sick Leave</h6>
+                    <p>Available: <span id="sickAvailable">0</span></p>
+                    <p>Used: <span id="sickUsed">0</span></p>
+                    <p>Remaining: <span id="sickRemaining">10</span></p>
+                </div>
+            </div>
+            <div class="col-md-4 shadow">
+                <div class="summary-card ">
+                    <h6 class="tag mt-4 text-center" >PTO</h6>
+                    <p>Available: <span id="ptoAvailable">19</span></p>
+                    <p>Used: <span id="ptoUsed">1</span></p>
+                    <p>Remaining: <span id="ptoRemaining">20</span></p>
+                </div>
+            </div>
+            <div class="col-md-4  shadow">
+                <div class="summary-card ">
+                    <h6 class="tag mt-4 text-center ">Other Leave</h6>
+                    <p>Available: <span id="otherAvailable">0</span></p>
+                    <p>Used: <span id="otherUsed">0</span></p>
+                    <p>Remaining: <span id="otherRemaining">5</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--        <button class="btn btn-outline-success my-2 my-sm-0 mt-5" data-toggle="modal" data-target="#approveLeaveModal">Approve</button>-->
+<!--        <button class="btn btn-outline-danger my-2 my-sm-0 mt-3" data-toggle="modal" data-target="#rejectLeaveModal">Reject</button>-->
+<!--        <button class="btn btn-outline-warning my-2 my-sm-0 mt-3" data-toggle="modal" data-target="#pendingLeaveModal">Pending</button>-->
+   </div>
+<div class="container">
+ <p style="display:none" id="empId"></p>
+    <!-- Profile Modal -->
+    <div id="profileModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Profile</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Name:</strong> <span id="profileName"></span></p>
+                    <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+                    <p><strong>Phone Number:</strong> <span id="profilePhone"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- My Leaves -->
+    <div id="my-leaves-section" class="leave-requests d-none col-10 m-5">
+        <h2>My Leaves</h2>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Leave Type</th>
+                <th>From Date</th>
+                <th>To Date</th>
+                <th>Reason</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody id="my-leaves-table">
+
+            </tbody>
+        </table>
+    </div>
+
+    <div id="my-team-leaves-section" class="my-team-leaves d-none col-10">
+        <h2>My Team's Leave Requests</h2>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+
+                <th>Leave Type</th>
+                <th>From Date</th>
+                <th>To Date</th>
+                <th>Reason</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody id="team-leaves-table">
+            <!-- Team leave entries will be populated here -->
+            </tbody>
+        </table>
+    </div>
+
+<div class="modal fade" id="applyLeaveModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Apply for Leave</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="apply-leave-form">
+                    <div class="form-group">
+                        <label for="leaveType">Leave Type</label>
+                        <select class="form-control" id="leaveType">
+                            <option value="SICK">Sick</option>
+                            <option value="PTO">PTO</option>
+                            <option value="CASUAL LEAVE">CASUAL LEAVE</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fromDate">From Date</label>
+                        <input type="date" class="form-control" id="fromDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="toDate">To Date</label>
+                        <input type="date" class="form-control" id="toDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="reason">Reason</label>
+                        <textarea class="form-control" id="reason"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src ="script.js"></script>
+</body>
+</html>
