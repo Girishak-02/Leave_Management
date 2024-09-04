@@ -26,8 +26,8 @@
                 <a class="nav-link" href="#" id="profileButton">Profile</a>
             </li>
         </ul>
-        <button class="btn btn-outline-primary my-2 my-sm-0 mt-3" data-toggle="modal" data-target="#applyLeaveModal">Apply for Leave</button>
-        <button class="btn btn-outline-success my-2 my-sm-0" id="logoutButton">Logout</button>
+        <button class="btn btn-outline-primary my-2 my-sm-0 mt-3 mr-3" data-toggle="modal" data-target="#applyLeaveModal" id="applyForLeave">Apply for Leave</button>
+        <button class="btn btn-outline-success my-2 my-sm-0" id="logoutButton" type="submit">Logout</button>
     </div>
 </nav>
 <div class="container">
@@ -35,7 +35,7 @@
         <h5>Dashboard</h5>
         <div class="row">
             <div class="col-md-4 shadow">
-                <div class="summary-card ">
+                <div class="summary-card">
                     <h6 class="tag mt-4 text-center">Sick Leave</h6>
                     <p>Available: <span id="sickAvailable">0</span></p>
                     <p>Used: <span id="sickUsed">0</span></p>
@@ -43,16 +43,16 @@
                 </div>
             </div>
             <div class="col-md-4 shadow">
-                <div class="summary-card ">
-                    <h6 class="tag mt-4 text-center" >PTO</h6>
+                <div class="summary-card">
+                    <h6 class="tag mt-4 text-center">PTO</h6>
                     <p>Available: <span id="ptoAvailable">19</span></p>
                     <p>Used: <span id="ptoUsed">1</span></p>
                     <p>Remaining: <span id="ptoRemaining">20</span></p>
                 </div>
             </div>
-            <div class="col-md-4  shadow">
-                <div class="summary-card ">
-                    <h6 class="tag mt-4 text-center ">Other Leave</h6>
+            <div class="col-md-4 shadow">
+                <div class="summary-card">
+                    <h6 class="tag mt-4 text-center">Other Leave</h6>
                     <p>Available: <span id="otherAvailable">0</span></p>
                     <p>Used: <span id="otherUsed">0</span></p>
                     <p>Remaining: <span id="otherRemaining">5</span></p>
@@ -60,9 +60,10 @@
             </div>
         </div>
     </div>
-<!--        <button class="btn btn-outline-success my-2 my-sm-0 mt-5" data-toggle="modal" data-target="#approveLeaveModal">Approve</button>-->
-<!--        <button class="btn btn-outline-danger my-2 my-sm-0 mt-3" data-toggle="modal" data-target="#rejectLeaveModal">Reject</button>-->
-<!--        <button class="btn btn-outline-warning my-2 my-sm-0 mt-3" data-toggle="modal" data-target="#pendingLeaveModal">Pending</button>-->
+    <div>
+        <button class="btn btn-outline-success my-2 my-sm-0 mt-5" data-toggle="modal" data-target="#approveLeaveModal" >Approved</button>
+        <button class="btn btn-outline-danger my-2 my-sm-0 mt-3" data-toggle="modal" data-target="#rejectLeaveModal">Rejected</button>
+        <button class="btn btn-outline-warning my-2 my-sm-0 mt-3" data-toggle="modal" data-target="#pendingLeaveModal">Pending</button>
    </div>
 <div class="container">
  <p style="display:none" id="empId"></p>
@@ -80,6 +81,8 @@
                     <p><strong>Name:</strong> <span id="profileName"></span></p>
                     <p><strong>Email:</strong> <span id="profileEmail"></span></p>
                     <p><strong>Phone Number:</strong> <span id="profilePhone"></span></p>
+                    <p><strong>Date Of Birth:</strong> <span id="dateOdBirth"></span></p>
+                    <p><strong>Employee Id:</strong> <span id="employeeId"></span></p>
                 </div>
             </div>
         </div>
@@ -110,7 +113,6 @@
         <table class="table table-bordered">
             <thead>
             <tr>
-
                 <th>Leave Type</th>
                 <th>From Date</th>
                 <th>To Date</th>
@@ -120,7 +122,6 @@
             </tr>
             </thead>
             <tbody id="team-leaves-table">
-            <!-- Team leave entries will be populated here -->
             </tbody>
         </table>
     </div>
@@ -135,37 +136,41 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="apply-leave-form">
+                <form id="apply-leave-form" action="http://localhost:8080/Leave_Managment_Project/leaves" method="post">
                     <div class="form-group">
                         <label for="leaveType">Leave Type</label>
-                        <select class="form-control" id="leaveType">
+                        <select class="form-control" id="leaveType" name="leaveType">
                             <option value="SICK">Sick</option>
                             <option value="PTO">PTO</option>
-                            <option value="CASUAL LEAVE">CASUAL LEAVE</option>
+                            <option value="CASUAL_LEAVE">Casual Leave</option> <!-- Ensure this matches the enum value in your Java code -->
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="fromDate">From Date</label>
-                        <input type="date" class="form-control" id="fromDate">
+                        <input type="date" class="form-control" id="fromDate" name="fromDate">
                     </div>
                     <div class="form-group">
                         <label for="toDate">To Date</label>
-                        <input type="date" class="form-control" id="toDate">
+                        <input type="date" class="form-control" id="toDate" name="toDate">
                     </div>
                     <div class="form-group">
                         <label for="reason">Reason</label>
-                        <textarea class="form-control" id="reason"></textarea>
+                        <textarea class="form-control" id="reason" name="reason"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary" id="leaveTypeSubmit" >Submit</button>
                 </form>
+
             </div>
         </div>
     </div>
 </div>
+</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src ="script.js"></script>
+
 </body>
 </html>

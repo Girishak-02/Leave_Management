@@ -11,7 +11,7 @@
 
 <!--    <servlet>-->
 <!--      <servlet-name>EmployeeServlet</servlet-name>-->
-<!--      <servlet-class>com.Wavemaker.LeaveManagement.Controller.EmployeeServlet</servlet-class>-->
+<!--      <servlet-class>com.wavemaker.LeaveManagement.Controller.EmployeeServlet</servlet-class>-->
 <!--    </servlet>-->
 <!--    <servlet-mapping>-->
 <!--      <servlet-name>EmployeeServlet</servlet-name>-->
@@ -20,7 +20,7 @@
 
 <!--  <filter>-->
 <!--    <filter-name>AuthenticationFilter</filter-name>-->
-<!--    <filter-class>com.Wavemaker.LeaveManagment.Filter.AuthenticationFilter</filter-class>-->
+<!--    <filter-class>com.wavemaker.LeaveManagment.Filter.AuthenticationFilter</filter-class>-->
 <!--  </filter>-->
 <!--  <filter-mapping>-->
 <!--    <filter-name>AuthenticationFilter</filter-name>-->
@@ -29,7 +29,7 @@
 
 <!--  <servlet>-->
 <!--    <servlet-name>EmployeeServlet</servlet-name>-->
-<!--    <servlet-class>com.Wavemaker.LeaveManagment.controller.EmployeeServlet</servlet-class>-->
+<!--    <servlet-class>controller.com.wavemaker.EmployeeServlet</servlet-class>-->
 <!--  </servlet>-->
 <!--  <servlet-mapping>-->
 <!--    <servlet-name>EmployeeServlet</servlet-name>-->
