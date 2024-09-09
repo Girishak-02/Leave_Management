@@ -8,10 +8,6 @@ PASSWORD VARCHAR(100) NOT NULL,
  FOREIGN KEY (EMP_ID) REFERENCES EMPLOYEES(EMP_ID)
 );
 
-
-select * from login;
-select * from employees;
-select * from leaves;
 CREATE TABLE EMPLOYEES(
 	EMP_ID INT AUTO_INCREMENT PRIMARY KEY,
     EMP_NAME VARCHAR(100) NOT NULL,
@@ -21,13 +17,7 @@ CREATE TABLE EMPLOYEES(
     MANAGER_ID INT,
     FOREIGN KEY (MANAGER_ID) REFERENCES EMPLOYEES(EMP_ID)
 );
-insert into employees ( LOGIN_ID,EMP_NAME, EMP_EMAIL,DOB,PHONE_NUMBER)values
-						(1,'Girisha','girisha@wavemaker.com','2022-07-04','9349875646') ;
-insert into employees ( LOGIN_ID,EMP_NAME, EMP_EMAIL,DOB,PHONE_NUMBER)values
-						(2,'Meghana','meghana@wavemaker.com','20-09-2024','9349875647') ;
-	
 
-SELECT * FROM EMPLOYEES;
 
 CREATE TABLE LEAVES (
     LEAVE_ID INT AUTO_INCREMENT PRIMARY KEY,
@@ -41,28 +31,15 @@ CREATE TABLE LEAVES (
     FOREIGN KEY (EMP_ID) REFERENCES EMPLOYEES(EMP_ID)
    
 );
-drop table leaves;
+select * from login;
+select * from employees;
+select * from leaves;
 
 
-CREATE TABLE LEAVETYPES(
-ID INT PRIMARY KEY AUTO_INCREMENT ,
-TYPE_NAME VARCHAR(20) NOT NULL
-);
- show tables;
 
 
-SELECT 
-    e.EMP_NAME,
-    e.EMP_MAIL,
-    l.LEAVE_TYPE,
-    l.FROM_DATE,
-    l.TO_DATE,
-    l.REASON,
-    l.STATUS
-FROM 
-    EMPLOYEES e
-JOIN 
-    LEAVES l ON e.EMP_ID = l.EMP_ID;
+
+
 
 INSERT INTO LOGIN (EMAIL, PASSWORD) VALUES ('girisha@wavemaker.com', '123');
 INSERT INTO LOGIN (EMAIL, PASSWORD) VALUES ('megha@wavemaker.com', '123');
@@ -79,13 +56,42 @@ SELECT * FROM LEAVES;
 
 drop database leavemanagment;
 
-CREATE TABLE LeaveSummary (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    EMP_ID INT,
-    LEAVE_TYPE ENUM('SICK','PTO','CASUAL LEAVE'),
-    AVAILABLE INT NOT NULL,
-    USED INT NOT NULL,
-    REMAINING INT NOT NULL,
-    FOREIGN KEY (EMP_ID) REFERENCES EMPLOYEES(EMP_ID)
-);
+-- CREATE TABLE LeaveSummary (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     EMP_ID INT,
+--     LEAVE_TYPE ENUM('SICK','PTO','CASUAL LEAVE'),
+--     AVAILABLE INT NOT NULL,
+--     USED INT NOT NULL,
+--     REMAINING INT NOT NULL,
+--     FOREIGN KEY (EMP_ID) REFERENCES EMPLOYEES(EMP_ID)
+-- );
 describe table Leaves;
+insert into employees ( LOGIN_ID,EMP_NAME, EMP_EMAIL,DOB,PHONE_NUMBER)values
+						(1,'Girisha','girisha@wavemaker.com','2022-07-04','9349875646') ;
+insert into employees ( LOGIN_ID,EMP_NAME, EMP_EMAIL,DOB,PHONE_NUMBER)values
+						(2,'Meghana','meghana@wavemaker.com','20-09-2024','9349875647') ;
+	
+
+SELECT * FROM EMPLOYEES;
+
+
+
+
+
+
+
+
+
+
+SELECT 
+    e.EMP_NAME,
+    e.EMP_EMAIL,
+    l.LEAVE_TYPE,
+    l.FROM_DATE,
+    l.TO_DATE,
+    l.REASON,
+    l.STATUS
+FROM 
+    EMPLOYEES e
+JOIN 
+    LEAVES l ON e.EMP_ID = l.EMP_ID;
